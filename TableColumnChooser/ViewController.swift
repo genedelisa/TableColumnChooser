@@ -9,19 +9,135 @@
 import Cocoa
 
 class ViewController: NSViewController {
+    
+    @IBOutlet var tableView: NSTableView!
+    struct Person {
+        var givenName:String
+        var familyName:String
+        var age = 0
+        init(givenName:String, familyName:String, age:Int) {
+            self.givenName = givenName
+            self.familyName = familyName
+            self.age = age
+        }
+    }
+    var dataArray = [Person]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dataArray.append(Person(givenName: "Noah", familyName: "Vale", age: 72))
+        dataArray.append(Person(givenName: "Sarah", familyName: "Yayvo", age: 29))
+        dataArray.append(Person(givenName: "Shanda", familyName: "Lear", age: 45))
+        
+        // set up colmn choosing
+        self.createTableContextMenu()
 
-        // Do any additional setup after loading the view.
     }
 
     override var representedObject: AnyObject? {
         didSet {
-        // Update the view, if already loaded.
         }
     }
+
+    // MARK: - Table column choosing
+
+    let kUserDefaultsKeyVisibleColumns = "kUserDefaultsKeyVisibleColumns"
+
+    func createTableContextMenu() {
+        
+        let tableHeaderContextMenu = NSMenu(title:"Select Columns")
+        let tableColumns = self.tableView.tableColumns
+        for column:NSTableColumn in tableColumns {
+            let title = column.headerCell.title
+            
+            if let item = tableHeaderContextMenu.addItemWithTitle(title,
+                action:"contextMenuSelected:",
+                keyEquivalent: "") {
+                    
+                    item.target = self
+                    item.representedObject = column
+                    item.state = NSOnState
+                    
+                    if let dict = NSUserDefaults.standardUserDefaults().dictionaryForKey(kUserDefaultsKeyVisibleColumns) as? [String : Bool] {
+                        if let hidden = dict[column.identifier] {
+                            column.hidden = hidden
+                        }
+                    }
+                    item.state = column.hidden ? NSOffState : NSOnState
+            }
+        }
+        self.tableView.headerView?.menu = tableHeaderContextMenu
+        
+        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveTableColumns", name: NSTableViewColumnDidMoveNotification, object: self.tableView)
+        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveTableColumns", name: NSTableViewColumnDidResizeNotification, object: self.tableView)
+    }
+    
+    func contextMenuSelected(menu:NSMenuItem) {
+        if let column = menu.representedObject as? NSTableColumn {
+            let shouldHide = !column.hidden
+            column.hidden = shouldHide
+            menu.state = column.hidden ? NSOffState: NSOnState
+            if shouldHide {
+//                tableView.sizeLastColumnToFit()
+                tableView.sizeToFit()
+            } else {
+                tableView.sizeToFit()
+            }
+        }
+        self.saveTableColumns()
+    }
+    
+    func saveTableColumns() {
+        var dict = [String : Bool]()
+        let tableColumns = self.tableView.tableColumns
+        for column:NSTableColumn in tableColumns {
+            dict[column.identifier] = column.hidden
+        }
+        NSUserDefaults.standardUserDefaults().setObject(dict, forKey: kUserDefaultsKeyVisibleColumns)
+    }
+    
 
 
 }
 
+// MARK: - NSTableViewDataSource
+extension ViewController: NSTableViewDataSource {
+    
+    func numberOfRowsInTableView(aTableView: NSTableView) -> Int {
+        return dataArray.count
+    }
+    
+}
+
+// MARK: - NSTableViewDelegate
+extension ViewController: NSTableViewDelegate {
+    
+    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        
+        if let column = tableColumn {
+            if let cellView = tableView.makeViewWithIdentifier(column.identifier, owner: self) as? NSTableCellView {
+                
+                let person = dataArray[row]
+                
+                if column.identifier == "givenName" {
+                    cellView.textField?.stringValue = "\(person.givenName)"
+                    return cellView
+                }
+                if column.identifier == "familyName" {
+                    cellView.textField?.stringValue = "\(person.familyName)"
+                    return cellView
+                }
+                if column.identifier == "age" {
+                    cellView.textField?.stringValue = "\(person.age)"
+                    return cellView
+                }
+
+                
+                return cellView
+            }
+        }
+        return nil
+    }
+    
+}

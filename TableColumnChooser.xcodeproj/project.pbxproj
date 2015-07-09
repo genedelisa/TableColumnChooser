@@ -13,6 +13,7 @@
 		B0FB3CDC1B4F0B5B00610D13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0FB3CDA1B4F0B5B00610D13 /* Main.storyboard */; };
 		B0FB3CE71B4F0B5B00610D13 /* TableColumnChooserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FB3CE61B4F0B5B00610D13 /* TableColumnChooserTests.swift */; };
 		B0FB3CF21B4F0B5B00610D13 /* TableColumnChooserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FB3CF11B4F0B5B00610D13 /* TableColumnChooserUITests.swift */; };
+		B0FB3D021B4F14AC00610D13 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B0FB3D011B4F14AC00610D13 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		B0FB3CED1B4F0B5B00610D13 /* TableColumnChooserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TableColumnChooserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0FB3CF11B4F0B5B00610D13 /* TableColumnChooserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableColumnChooserUITests.swift; sourceTree = "<group>"; };
 		B0FB3CF31B4F0B5B00610D13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0FB3D011B4F14AC00610D13 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 		B0FB3CC81B4F0B5B00610D13 = {
 			isa = PBXGroup;
 			children = (
+				B0FB3D011B4F14AC00610D13 /* README.md */,
 				B0FB3CD31B4F0B5B00610D13 /* TableColumnChooser */,
 				B0FB3CE51B4F0B5B00610D13 /* TableColumnChooserTests */,
 				B0FB3CF01B4F0B5B00610D13 /* TableColumnChooserUITests */,
@@ -251,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0FB3D021B4F14AC00610D13 /* README.md in Sources */,
 				B0FB3CD71B4F0B5B00610D13 /* ViewController.swift in Sources */,
 				B0FB3CD51B4F0B5B00610D13 /* AppDelegate.swift in Sources */,
 			);
