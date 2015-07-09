@@ -1,6 +1,8 @@
 # TableColumnChooser
 
-Swift NSTableView with choosable columns
+Swift NSTableView with choosable columns.
+
+The header has a context menu for choosing the columns. The selection is saved to User Defaults.
 
 
 ## Blog post for this example.

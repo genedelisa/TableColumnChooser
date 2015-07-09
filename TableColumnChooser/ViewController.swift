@@ -11,28 +11,33 @@ import Cocoa
 class ViewController: NSViewController {
     
     @IBOutlet var tableView: NSTableView!
+    
+    /// just a goofy data example
     struct Person {
         var givenName:String
         var familyName:String
         var age = 0
+        
         init(givenName:String, familyName:String, age:Int) {
             self.givenName = givenName
             self.familyName = familyName
             self.age = age
         }
     }
+    
+    /// the data for the table
     var dataArray = [Person]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        // create some people
         dataArray.append(Person(givenName: "Noah", familyName: "Vale", age: 72))
         dataArray.append(Person(givenName: "Sarah", familyName: "Yayvo", age: 29))
         dataArray.append(Person(givenName: "Shanda", familyName: "Lear", age: 45))
         
         // set up colmn choosing
         self.createTableContextMenu()
-
     }
 
     override var representedObject: AnyObject? {
@@ -42,13 +47,15 @@ class ViewController: NSViewController {
 
     // MARK: - Table column choosing
 
+    /// the key in user defaults
     let kUserDefaultsKeyVisibleColumns = "kUserDefaultsKeyVisibleColumns"
 
+    /// set up the table header context menu for choosing the columns.
     func createTableContextMenu() {
         
         let tableHeaderContextMenu = NSMenu(title:"Select Columns")
         let tableColumns = self.tableView.tableColumns
-        for column:NSTableColumn in tableColumns {
+        for column in tableColumns {
             let title = column.headerCell.title
             
             if let item = tableHeaderContextMenu.addItemWithTitle(title,
@@ -68,27 +75,27 @@ class ViewController: NSViewController {
             }
         }
         self.tableView.headerView?.menu = tableHeaderContextMenu
-        
-        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveTableColumns", name: NSTableViewColumnDidMoveNotification, object: self.tableView)
-        //        NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveTableColumns", name: NSTableViewColumnDidResizeNotification, object: self.tableView)
     }
     
+    /// The table action. `addItemWithTitle` specifies this func.
     func contextMenuSelected(menu:NSMenuItem) {
         if let column = menu.representedObject as? NSTableColumn {
             let shouldHide = !column.hidden
             column.hidden = shouldHide
             menu.state = column.hidden ? NSOffState: NSOnState
             if shouldHide {
+                // haven't decided which I like better.
 //                tableView.sizeLastColumnToFit()
                 tableView.sizeToFit()
             } else {
                 tableView.sizeToFit()
             }
         }
-        self.saveTableColumns()
+        self.saveTableColumnDefaults()
     }
     
-    func saveTableColumns() {
+    /// Writes the selection to user defaults. Called every time an item is chosen.
+    func saveTableColumnDefaults() {
         var dict = [String : Bool]()
         let tableColumns = self.tableView.tableColumns
         for column:NSTableColumn in tableColumns {
@@ -132,7 +139,6 @@ extension ViewController: NSTableViewDelegate {
                     cellView.textField?.stringValue = "\(person.age)"
                     return cellView
                 }
-
                 
                 return cellView
             }
