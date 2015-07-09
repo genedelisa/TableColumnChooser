@@ -13,7 +13,6 @@
 		B0FB3CDC1B4F0B5B00610D13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0FB3CDA1B4F0B5B00610D13 /* Main.storyboard */; };
 		B0FB3CE71B4F0B5B00610D13 /* TableColumnChooserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FB3CE61B4F0B5B00610D13 /* TableColumnChooserTests.swift */; };
 		B0FB3CF21B4F0B5B00610D13 /* TableColumnChooserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FB3CF11B4F0B5B00610D13 /* TableColumnChooserUITests.swift */; };
-		B0FB3D021B4F14AC00610D13 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = B0FB3D011B4F14AC00610D13 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -254,7 +253,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0FB3D021B4F14AC00610D13 /* README.md in Sources */,
 				B0FB3CD71B4F0B5B00610D13 /* ViewController.swift in Sources */,
 				B0FB3CD51B4F0B5B00610D13 /* AppDelegate.swift in Sources */,
 			);
@@ -478,6 +476,7 @@
 				B0FB3CF81B4F0B5B00610D13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B0FB3CF91B4F0B5B00610D13 /* Build configuration list for PBXNativeTarget "TableColumnChooserTests" */ = {
 			isa = XCConfigurationList;
@@ -486,6 +485,7 @@
 				B0FB3CFB1B4F0B5B00610D13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B0FB3CFC1B4F0B5B00610D13 /* Build configuration list for PBXNativeTarget "TableColumnChooserUITests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +494,7 @@
 				B0FB3CFE1B4F0B5B00610D13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
