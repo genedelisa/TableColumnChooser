@@ -7,7 +7,7 @@ The header has a context menu for choosing the columns. The selection is saved t
 
 ## Blog post for this example.
 
-[Blog post](http://www.rockhoppertech.com/blog/swift-table-column-chooser/)
+[Blog post](http://www.rockhoppertech.com/blog/swift-nstable-column-chooser/)
 
 
 ## Bugs
