@@ -23,7 +23,7 @@ Don't see any. Do you?'
 
 ## Licensing
 
-I'd appreciate an ack somehow.
+[MIT](https://en.wikipedia.org/wiki/MIT_License)
 
 ## Credits
 
