@@ -10,6 +10,7 @@
 		B068A0E71B528C6900E5A431 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B068A0E61B528C6900E5A431 /* LICENSE */; };
 		B068A0E91B528C8800E5A431 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B068A0E81B528C8800E5A431 /* .gitignore */; };
 		B068A0EB1B5290A200E5A431 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = B068A0EA1B5290A200E5A431 /* .travis.yml */; };
+		B068A0F31B52A22A00E5A431 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = B068A0F21B52A22A00E5A431 /* Credits.html */; };
 		B0FB3CD51B4F0B5B00610D13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FB3CD41B4F0B5B00610D13 /* AppDelegate.swift */; };
 		B0FB3CD71B4F0B5B00610D13 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FB3CD61B4F0B5B00610D13 /* ViewController.swift */; };
 		B0FB3CD91B4F0B5B00610D13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0FB3CD81B4F0B5B00610D13 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		B068A0E61B528C6900E5A431 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B068A0E81B528C8800E5A431 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B068A0EA1B5290A200E5A431 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		B068A0F21B52A22A00E5A431 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 		B0FB3CD11B4F0B5B00610D13 /* TableColumnChooser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableColumnChooser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0FB3CD41B4F0B5B00610D13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0FB3CD61B4F0B5B00610D13 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		B0FB3CC81B4F0B5B00610D13 = {
 			isa = PBXGroup;
 			children = (
+				B068A0F21B52A22A00E5A431 /* Credits.html */,
 				B068A0EA1B5290A200E5A431 /* .travis.yml */,
 				B068A0E81B528C8800E5A431 /* .gitignore */,
 				B068A0E61B528C6900E5A431 /* LICENSE */,
@@ -237,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B068A0EB1B5290A200E5A431 /* .travis.yml in Resources */,
+				B068A0F31B52A22A00E5A431 /* Credits.html in Resources */,
 				B068A0E91B528C8800E5A431 /* .gitignore in Resources */,
 				B068A0E71B528C6900E5A431 /* LICENSE in Resources */,
 				B0FB3CD91B4F0B5B00610D13 /* Assets.xcassets in Resources */,

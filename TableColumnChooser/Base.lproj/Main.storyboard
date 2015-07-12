@@ -687,7 +687,7 @@
                                             <tableColumns>
                                                 <tableColumn identifier="givenName" width="125" minWidth="10" maxWidth="3.4028234663852886e+38" id="6OU-Np-Dsa">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Given Name">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="systemBold"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -719,7 +719,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="familyName" width="240" minWidth="40" maxWidth="1000" id="EHX-kv-Pxw">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Family Name">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="systemBold"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -751,7 +751,7 @@
                                                 </tableColumn>
                                                 <tableColumn identifier="age" width="193" minWidth="40" maxWidth="1000" id="9KB-Ck-16z">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Age">
-                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <font key="font" metaFont="systemBold"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
