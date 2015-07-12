@@ -19,6 +19,7 @@ Don't see any. Do you?'
 [![GitHub version](https://badge.fury.io/gh/genedelisa%2FTableColumnChooser.svg)](http://badge.fury.io/gh/genedelisa%2FTableColumnChooser)
 
 
+[![Build Status](https://travis-ci.org/genedelisa/TableColumnChooser.svg?branch=master)(https://travis-ci.org/genedelisa/TableColumnChooser)
 
 
 ### Buy my kitty Giacomo some cat food
