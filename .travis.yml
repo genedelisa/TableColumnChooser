@@ -1,0 +1,14 @@
+# file: .travis.yml
+language: objective-c
+osx_image: xcode63
+xcode_project: TableColumnChooser.xcodeproj
+xcode_scheme: TableColumnChooser
+xcode_sdk: iphonesimulator8.1
+
+before_install:
+- brew update
+- brew outdated xctool || brew upgrade xctool
+- gem install xcpretty -N
+
+script:
+xcodebuild -project TableColumnChooser.xcodeproj -scheme "TableColumnChooser" -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6" ONLY_ACTIVE_ARCH=NO test | xcpretty -c

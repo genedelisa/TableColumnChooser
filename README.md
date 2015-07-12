@@ -14,6 +14,12 @@ The header has a context menu for choosing the columns. The selection is saved t
 
 Don't see any. Do you?'
 
+## Status
+
+[![GitHub version](https://badge.fury.io/gh/genedelisa%2FTableColumnChooser.svg)](http://badge.fury.io/gh/genedelisa%2FTableColumnChooser)
+
+
+
 
 ### Buy my kitty Giacomo some cat food
 
