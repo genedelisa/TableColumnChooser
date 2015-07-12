@@ -12,7 +12,9 @@ The header has a context menu for choosing the columns. The selection is saved t
 
 ## Bugs
 
-Don't see any. Do you?'
+Don't see any. Do you?
+
+If you find one, [please add it to issues](https://github.com/genedelisa/TableColumnChooser/issues)
 
 ## Status
 
@@ -33,5 +35,6 @@ Don't see any. Do you?'
 [MIT](https://en.wikipedia.org/wiki/MIT_License)
 
 ## Credits
-
 *	[Gene De Lisa](http://rockhoppertech.com/blog/)
+*	[Gene De Lisa music blog](http://genedelisa.com/)
+*   Twitter: [@GeneDeLisaDev](http://twitter.com/genedelisadev)
