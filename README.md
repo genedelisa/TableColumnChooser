@@ -4,6 +4,11 @@ Swift NSTableView with choosable columns.
 
 The header has a context menu for choosing the columns. The selection is saved to User Defaults.
 
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://en.wikipedia.org/wiki/MIT_License)
+[![Build Status](https://travis-ci.org/genedelisa/TableColumnChooser.svg)](https://travis-ci.org/genedelisa/TableColumnChooser)
+[![GitHub tag](https://img.shields.io/github/tag/genedelisa/tablecolumnchooser.svg)](https://github.com/genedelisa/TableColumnChooser/)
+[![GitHub release](https://img.shields.io/github/release/genedelisa/tablecolumnchooser.svg)](https://github.com/genedelisa/TableColumnChooser/)
+
 
 ## Blog post for this example.
 
@@ -18,7 +23,7 @@ If you find one, [please add it to issues](https://github.com/genedelisa/TableCo
 
 ## Status
 
-[![GitHub version](https://badge.fury.io/gh/genedelisa%2FTableColumnChooser.svg)](http://badge.fury.io/gh/genedelisa%2FTableColumnChooser)
+<!--[![GitHub version](https://badge.fury.io/gh/genedelisa%2FTableColumnChooser.svg)](http://badge.fury.io/gh/genedelisa%2FTableColumnChooser)-->
 
 
 [![Build Status](https://travis-ci.org/genedelisa/TableColumnChooser.svg?branch=master)](https://travis-ci.org/genedelisa/TableColumnChooser)
