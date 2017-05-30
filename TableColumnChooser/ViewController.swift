@@ -27,10 +27,10 @@ class ViewController: NSViewController {
     
     /// the data for the table
     var dataArray = [Person]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // create some people
         dataArray.append(Person(givenName: "Noah", familyName: "Vale", age: 72))
         dataArray.append(Person(givenName: "Sarah", familyName: "Yayvo", age: 29))
@@ -62,17 +62,17 @@ class ViewController: NSViewController {
         // set up colmn choosing
         self.createTableContextMenu()
     }
-
-    override var representedObject: AnyObject? {
+    
+    override var representedObject: Any? {
         didSet {
         }
     }
-
+    
     // MARK: - Table column choosing
-
+    
     /// the key in user defaults
     let kUserDefaultsKeyVisibleColumns = "kUserDefaultsKeyVisibleColumns"
-
+    
     /// set up the table header context menu for choosing the columns.
     func createTableContextMenu() {
         
@@ -81,34 +81,34 @@ class ViewController: NSViewController {
         for column in tableColumns {
             let title = column.headerCell.title
             
-            if let item = tableHeaderContextMenu.addItemWithTitle(title,
-                action:"contextMenuSelected:",
-                keyEquivalent: "") {
-                    
-                    item.target = self
-                    item.representedObject = column
-                    item.state = NSOnState
-                    
-                    if let dict = NSUserDefaults.standardUserDefaults().dictionaryForKey(kUserDefaultsKeyVisibleColumns) as? [String : Bool] {
-                        if let hidden = dict[column.identifier] {
-                            column.hidden = hidden
-                        }
-                    }
-                    item.state = column.hidden ? NSOffState : NSOnState
+            let item = tableHeaderContextMenu.addItem(withTitle: title,
+                                                      action:#selector(contextMenuSelected(_:)),
+                                                      keyEquivalent: "")
+            
+            item.target = self
+            item.representedObject = column
+            item.state = NSOnState
+            
+            if let dict = UserDefaults.standard.dictionary(forKey: kUserDefaultsKeyVisibleColumns) as? [String : Bool] {
+                if let hidden = dict[column.identifier] {
+                    column.isHidden = hidden
+                }
             }
+            item.state = column.isHidden ? NSOffState : NSOnState
+            
         }
         self.tableView.headerView?.menu = tableHeaderContextMenu
     }
     
     /// The table action. `addItemWithTitle` specifies this func.
-    func contextMenuSelected(menu:NSMenuItem) {
+    func contextMenuSelected(_ menu:NSMenuItem) {
         if let column = menu.representedObject as? NSTableColumn {
-            let shouldHide = !column.hidden
-            column.hidden = shouldHide
-            menu.state = column.hidden ? NSOffState: NSOnState
+            let shouldHide = !column.isHidden
+            column.isHidden = shouldHide
+            menu.state = column.isHidden ? NSOffState: NSOnState
             if shouldHide {
                 // haven't decided which I like better.
-//                tableView.sizeLastColumnToFit()
+                //                tableView.sizeLastColumnToFit()
                 tableView.sizeToFit()
             } else {
                 tableView.sizeToFit()
@@ -122,17 +122,17 @@ class ViewController: NSViewController {
         var dict = [String : Bool]()
         let tableColumns = self.tableView.tableColumns
         for column:NSTableColumn in tableColumns {
-            dict[column.identifier] = column.hidden
+            dict[column.identifier] = column.isHidden
         }
-        NSUserDefaults.standardUserDefaults().setObject(dict, forKey: kUserDefaultsKeyVisibleColumns)
+        UserDefaults.standard.set(dict, forKey: kUserDefaultsKeyVisibleColumns)
     }
-
+    
 }
 
 // MARK: - NSTableViewDataSource
 extension ViewController: NSTableViewDataSource {
     
-    func numberOfRowsInTableView(aTableView: NSTableView) -> Int {
+    func numberOfRows(in aTableView: NSTableView) -> Int {
         return dataArray.count
     }
     
@@ -141,10 +141,10 @@ extension ViewController: NSTableViewDataSource {
 // MARK: - NSTableViewDelegate
 extension ViewController: NSTableViewDelegate {
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
         if let column = tableColumn {
-            if let cellView = tableView.makeViewWithIdentifier(column.identifier, owner: self) as? NSTableCellView {
+            if let cellView = tableView.make(withIdentifier: column.identifier, owner: self) as? NSTableCellView {
                 
                 let person = dataArray[row]
                 

@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   
     let kUserDefaultsKeyVisibleColumns = "kUserDefaultsKeyVisibleColumns"
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
 
 
@@ -24,12 +24,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         dict["familyName"] = false
         dict["age"] = false
         var defaults = [String:AnyObject]()
-        defaults[kUserDefaultsKeyVisibleColumns] = dict
-        NSUserDefaults.standardUserDefaults().registerDefaults(defaults)
+        defaults[kUserDefaultsKeyVisibleColumns] = dict as AnyObject
+        UserDefaults.standard.register(defaults: defaults)
 
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 

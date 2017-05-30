@@ -1,6 +1,6 @@
 # file: .travis.yml
 language: objective-c
-osx_image: xcode63
+osx_image: xcode8
 xcode_project: TableColumnChooser.xcodeproj
 xcode_scheme: TableColumnChooser
 
