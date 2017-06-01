@@ -31,6 +31,18 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // set up sorting
+        let ageDescriptor = NSSortDescriptor(key: "age", ascending: true)
+        let familyNameDescriptor = NSSortDescriptor(key: "familyName", ascending: true,
+                                                    selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
+        let givenNameDescriptor = NSSortDescriptor(key: "givenName", ascending: true,
+                                                   selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
+        
+        tableView.tableColumns[0].sortDescriptorPrototype = givenNameDescriptor
+        tableView.tableColumns[1].sortDescriptorPrototype = familyNameDescriptor
+        tableView.tableColumns[2].sortDescriptorPrototype = ageDescriptor
+        
+        
         // create some people
         dataArray.append(Person(givenName: "Noah", familyName: "Vale", age: 72))
         dataArray.append(Person(givenName: "Sarah", familyName: "Yayvo", age: 29))
@@ -61,12 +73,37 @@ class ViewController: NSViewController {
         
         // set up colmn choosing
         self.createTableContextMenu()
+        
+        tableView.doubleAction = #selector(doubleClick(_:))
+        //or        tableView.action =
     }
+    
     
     override var representedObject: Any? {
         didSet {
+            if let person = representedObject as? Person {
+                print(person)
+                reload()
+            }
         }
     }
+    
+    func reload() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func doubleClick(_ sender:AnyObject) {
+        // the sender is the tableview
+        
+        guard tableView.selectedRow >= 0 else {
+            return
+        }
+        let item = dataArray[tableView.selectedRow]
+        representedObject = item
+    }
+    
     
     // MARK: - Table column choosing
     
@@ -165,6 +202,65 @@ extension ViewController: NSTableViewDelegate {
             }
         }
         return nil
+    }
+    
+    // or you can set the tableview's action property to something else
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        if let table = notification.object as? NSTableView {
+            print(table.selectedRow)
+        }
+    }
+    
+    func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
+        
+        // the first sort descriptor that corresponds to the column header clicked by the user
+        guard let sortDescriptor = tableView.sortDescriptors.first else {
+            return
+        }
+        
+        if sortDescriptor.key == "age" {
+            if sortDescriptor.ascending {
+                self.dataArray = dataArray.sorted { $0.age < $1.age }
+            } else {
+                self.dataArray = dataArray.sorted { $0.age > $1.age }
+            }
+        }
+        
+        if sortDescriptor.key == "familyName" {
+            if sortDescriptor.ascending {
+                self.dataArray = dataArray.sorted {lhs, rhs in
+                    let l = lhs.familyName.characters
+                    let r = rhs.familyName.characters
+                    return l.lexicographicallyPrecedes(r)
+                }
+            } else {
+                self.dataArray = dataArray.sorted {lhs, rhs in
+                    let l = lhs.familyName.characters
+                    let r = rhs.familyName.characters
+                    return !l.lexicographicallyPrecedes(r)
+                }
+            }
+        }
+        
+        if sortDescriptor.key == "givenName" {
+            if sortDescriptor.ascending {
+                self.dataArray = dataArray.sorted {lhs, rhs in
+                    let l = lhs.givenName.characters
+                    let r = rhs.givenName.characters
+                    return l.lexicographicallyPrecedes(r)
+                }
+            } else {
+                self.dataArray = dataArray.sorted {lhs, rhs in
+                    let l = lhs.givenName.characters
+                    let r = rhs.givenName.characters
+                    return !l.lexicographicallyPrecedes(r)
+                }
+            }
+        }
+        print("sortDescriptor.key \(String(describing: sortDescriptor.key))")
+        
+        reload()
+        
     }
     
 }

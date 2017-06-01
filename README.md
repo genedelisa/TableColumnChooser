@@ -4,13 +4,13 @@ Swift NSTableView with choosable columns.
 
 The header has a context menu for choosing the columns. The selection is saved to User Defaults.
 
+Since there were many requests for column sorting, I added that.
+
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://en.wikipedia.org/wiki/MIT_License)
 [![Build Status](https://travis-ci.org/genedelisa/TableColumnChooser.svg)](https://travis-ci.org/genedelisa/TableColumnChooser)
 [![GitHub tag](https://img.shields.io/github/tag/genedelisa/tablecolumnchooser.svg)](https://github.com/genedelisa/TableColumnChooser/)
 [![GitHub release](https://img.shields.io/github/release/genedelisa/tablecolumnchooser.svg)](https://github.com/genedelisa/TableColumnChooser/)
-
 [![Swift 3](https://img.shields.io/badge/swift3-compatible-4BC51D.svg?style=flat")](https://developer.apple.com/swift)
-
 [![Platforms macOS](https://img.shields.io/badge/Platforms-macOS%2010.12-lightgray.svg?style=flat)](https://swift.org/)
 
 [![Sponsors](https://img.shields.io/badge/Sponsors-Rockhopper%20Technologies-orange.svg?style=flat)](http://www.rockhoppertech.com/)
