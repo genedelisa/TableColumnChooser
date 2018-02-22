@@ -10,6 +10,7 @@ import Cocoa
 
 class ViewController: NSViewController {
     
+    
     @IBOutlet var tableView: NSTableView!
     
     /// just a goofy data example
@@ -30,18 +31,6 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // set up sorting
-        let ageDescriptor = NSSortDescriptor(key: "age", ascending: true)
-        let familyNameDescriptor = NSSortDescriptor(key: "familyName", ascending: true,
-                                                    selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
-        let givenNameDescriptor = NSSortDescriptor(key: "givenName", ascending: true,
-                                                   selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
-        
-        tableView.tableColumns[0].sortDescriptorPrototype = givenNameDescriptor
-        tableView.tableColumns[1].sortDescriptorPrototype = familyNameDescriptor
-        tableView.tableColumns[2].sortDescriptorPrototype = ageDescriptor
-        
         
         // create some people
         dataArray.append(Person(givenName: "Noah", familyName: "Vale", age: 72))
@@ -71,6 +60,17 @@ class ViewController: NSViewController {
         dataArray.append(Person(givenName: "Woody", familyName: "Forrest", age: 62))
         dataArray.append(Person(givenName: "X.", familyName: "Benedict", age: 88))
         
+        // set up sorting
+        let ageDescriptor = NSSortDescriptor(key: "age", ascending: true)
+        let familyNameDescriptor = NSSortDescriptor(key: "familyName", ascending: true,
+                                                    selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
+        let givenNameDescriptor = NSSortDescriptor(key: "givenName", ascending: true,
+                                                   selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
+        
+        tableView.tableColumns[0].sortDescriptorPrototype = givenNameDescriptor
+        tableView.tableColumns[1].sortDescriptorPrototype = familyNameDescriptor
+        tableView.tableColumns[2].sortDescriptorPrototype = ageDescriptor
+        
         // set up colmn choosing
         self.createTableContextMenu()
         
@@ -94,7 +94,7 @@ class ViewController: NSViewController {
         }
     }
     
-    func doubleClick(_ sender:AnyObject) {
+    @objc func doubleClick(_ sender:AnyObject) {
         // the sender is the tableview
         
         guard tableView.selectedRow >= 0 else {
@@ -113,7 +113,7 @@ class ViewController: NSViewController {
     /// set up the table header context menu for choosing the columns.
     func createTableContextMenu() {
         
-        let tableHeaderContextMenu = NSMenu(title:"Select Columns")
+        let tableHeaderContextMenu = NSMenu(title: "Select Columns")
         let tableColumns = self.tableView.tableColumns
         for column in tableColumns {
             let title = column.headerCell.title
@@ -124,25 +124,25 @@ class ViewController: NSViewController {
             
             item.target = self
             item.representedObject = column
-            item.state = NSOnState
+            item.state = .on
             
             if let dict = UserDefaults.standard.dictionary(forKey: kUserDefaultsKeyVisibleColumns) as? [String : Bool] {
-                if let hidden = dict[column.identifier] {
+                if let hidden = dict[column.identifier.rawValue] {
                     column.isHidden = hidden
                 }
             }
-            item.state = column.isHidden ? NSOffState : NSOnState
+            item.state = column.isHidden ? .off : .on
             
         }
         self.tableView.headerView?.menu = tableHeaderContextMenu
     }
     
     /// The table action. `addItemWithTitle` specifies this func.
-    func contextMenuSelected(_ menu:NSMenuItem) {
+    @objc func contextMenuSelected(_ menu: NSMenuItem) {
         if let column = menu.representedObject as? NSTableColumn {
             let shouldHide = !column.isHidden
             column.isHidden = shouldHide
-            menu.state = column.isHidden ? NSOffState: NSOnState
+            menu.state = column.isHidden ? .off: .on
             if shouldHide {
                 // haven't decided which I like better.
                 //                tableView.sizeLastColumnToFit()
@@ -156,10 +156,10 @@ class ViewController: NSViewController {
     
     /// Writes the selection to user defaults. Called every time an item is chosen.
     func saveTableColumnDefaults() {
-        var dict = [String : Bool]()
+        var dict = [String: Bool]()
         let tableColumns = self.tableView.tableColumns
-        for column:NSTableColumn in tableColumns {
-            dict[column.identifier] = column.isHidden
+        for column: NSTableColumn in tableColumns {
+            dict[column.identifier.rawValue] = column.isHidden
         }
         UserDefaults.standard.set(dict, forKey: kUserDefaultsKeyVisibleColumns)
     }
@@ -181,19 +181,21 @@ extension ViewController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
         if let column = tableColumn {
-            if let cellView = tableView.make(withIdentifier: column.identifier, owner: self) as? NSTableCellView {
+            if let cellView = tableView.makeView(withIdentifier: column.identifier, owner: self) as? NSTableCellView {
                 
                 let person = dataArray[row]
                 
-                if column.identifier == "givenName" {
+                print(column.identifier.rawValue)
+                
+                if column.identifier.rawValue == "givenName" {
                     cellView.textField?.stringValue = "\(person.givenName)"
                     return cellView
                 }
-                if column.identifier == "familyName" {
+                if column.identifier.rawValue == "familyName" {
                     cellView.textField?.stringValue = "\(person.familyName)"
                     return cellView
                 }
-                if column.identifier == "age" {
+                if column.identifier.rawValue == "age" {
                     cellView.textField?.stringValue = "\(person.age)"
                     return cellView
                 }
@@ -229,14 +231,14 @@ extension ViewController: NSTableViewDelegate {
         if sortDescriptor.key == "familyName" {
             if sortDescriptor.ascending {
                 self.dataArray = dataArray.sorted {lhs, rhs in
-                    let l = lhs.familyName.characters
-                    let r = rhs.familyName.characters
+                    let l = lhs.familyName
+                    let r = rhs.familyName
                     return l.lexicographicallyPrecedes(r)
                 }
             } else {
                 self.dataArray = dataArray.sorted {lhs, rhs in
-                    let l = lhs.familyName.characters
-                    let r = rhs.familyName.characters
+                    let l = lhs.familyName
+                    let r = rhs.familyName
                     return !l.lexicographicallyPrecedes(r)
                 }
             }
@@ -245,14 +247,14 @@ extension ViewController: NSTableViewDelegate {
         if sortDescriptor.key == "givenName" {
             if sortDescriptor.ascending {
                 self.dataArray = dataArray.sorted {lhs, rhs in
-                    let l = lhs.givenName.characters
-                    let r = rhs.givenName.characters
+                    let l = lhs.givenName
+                    let r = rhs.givenName
                     return l.lexicographicallyPrecedes(r)
                 }
             } else {
                 self.dataArray = dataArray.sorted {lhs, rhs in
-                    let l = lhs.givenName.characters
-                    let r = rhs.givenName.characters
+                    let l = lhs.givenName
+                    let r = rhs.givenName
                     return !l.lexicographicallyPrecedes(r)
                 }
             }
@@ -263,4 +265,6 @@ extension ViewController: NSTableViewDelegate {
         
     }
     
+    
 }
+
